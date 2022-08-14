@@ -23,11 +23,10 @@ async function run() {
   console.log('**** GENERATING PROOF ****');
   const { proof, publicSignals } = await snarkjs.groth16.fullProve(
     inputs,
-    'circuit.wasm',
-    'https://cloudflare-ipfs.com/ipfs/bafybeidf5knam5nygkqo4nvpez7zj6a7jberur2anjc4vvcvczqav5yfcq/circuit.zkey'
+    'https://dx9qacyqak197.cloudfront.net/circuit.wasm',
+    'https://dx9qacyqak197.cloudfront.net/circuit.zkey'
   );
 
-  
   console.log('**** VERIFYING PROOF ****');
   const vKey = JSON.parse(fs.readFileSync('verification_key.json'));
   const res = await snarkjs.groth16.verify(vKey, publicSignals, proof);
@@ -61,9 +60,8 @@ async function run() {
   console.log('**** PROOF: ****');
   console.log(JSON.stringify({ a, b, c, input }, null, 1));
 
-  fs.writeFileSync('proof.json', JSON.stringify({ a, b, c, input }, null, 1)));
+  fs.writeFileSync('proof.json', JSON.stringify({ a, b, c, input }, null, 1));
   console.log('**** PROOF SAVED IN PROOF.JSON ****');
-
 }
 
 run().then(() => {
